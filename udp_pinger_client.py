@@ -1,11 +1,9 @@
-## PROGRAM COPIED FROM PA1 TO BE MODIFIED TO SUIT PA2
-
-# testing testing
+## PROGRAM COPIED FROM PA1 TO BE MODIFIED TO SUIT PA2 # MEAGAN
 
 import socket
 
-HOST = "10.0.0.1"  # todo: specify the server's hostname or IP address inside the quotes
-PORT = 3737 # todo: specify the port number used by the server
+HOST = ""  # todo: specify the server's hostname or IP address inside the quotes
+PORT = 0000 # todo: specify the port number used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     s.connect((HOST, PORT))
