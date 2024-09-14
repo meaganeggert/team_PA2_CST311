@@ -1,25 +1,26 @@
-# udp_pinger_server_starter.py
-# We will need the following module to generate
-# randomized lost packets
 import random
 from socket import socket, AF_INET, SOCK_DGRAM
 
-# TODO: 
-# 1. Create a UDP socket. Be sure to use SOCK_DGRAM since we are working with UDP packets
-# 2. Assign IP address and port number to socket
-# 3. Initialze a variable to count the number of pings
+
+HOST = "10.0.0.1"
+PORT = 3737
 
 def main():
-    # TODO:
-    # 1. Start an infinite loop
-    # 2. Count the pings received using the previously initialized variable
-    # 3. Generate a random number between 1 and 10 (inclusive)
-    # 4. Receive the client packet along with the address it is coming from
-    # 5. IF conditions for packet loss simulation are met, THEN consider the packet lost and do not respond
-    # 6. Otherwise, the server responds
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+    s.bind((HOST, PORT))
+    print('Server listening on {}:{}'.format(HOST, PORT))
+    while True:
+        data, addr = s.recvfrom(1024)
+        if not data:
+            break
+        message = data.decode('utf-8')
+        message = message.upper()
+        print("SERVER:", message)
+        
+        data = message.encode('utf-8')
+        
+        s.sendto(data, addr)
+
 
 if __name__ == "__main__":
   main()
-
-# The server sits in an infinite loop listening for incoming UDP packets. 
-# When a packet comes in, the server will decide to respond based on the implemented packet loss simulation condition.
