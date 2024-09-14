@@ -1,5 +1,6 @@
 import socket
 import random
+import time
 from datetime import datetime
 
 HOST = "10.0.0.1"  # todo: specify the server's hostname or IP address inside the quotes
@@ -11,12 +12,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     s.connect((HOST, PORT))
     while True:
         now = datetime.now() # current date/time
-        time = now.strftime("%H:%M:%S")
-#        time = now.strftime("%H:%M:%S:%f") # This format includes microseconds
+        cur_time = now.strftime("%H:%M:%S")
+#        cur_time = now.strftime("%H:%M:%S:%f") # This format includes microseconds
 
         drop_prob = random.random()
         if drop_prob > 0.3:
-            message = str(HB_num) + " " + time
+            message = str(HB_num) + " " + cur_time
             byte_msg = message.encode('utf-8')
             s.sendall(byte_msg)
             data = s.recv(1024)
@@ -30,3 +31,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
 #            print("Received: {}".format(data.decode('utf-8')))
 
         HB_num += 1
+        time.sleep(3)
