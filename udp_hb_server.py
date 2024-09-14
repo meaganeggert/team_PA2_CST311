@@ -13,6 +13,9 @@ def main():
             data, addr = s.recvfrom(1024)
             if not data:
                 break
+            message = data.decode('utf-8')
+            message = message.upper()
+            data = message.encode('utf-8')
             s.sendto(data, addr)
 
         
