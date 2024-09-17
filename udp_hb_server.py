@@ -22,6 +22,9 @@ def main():
             client_ip = addr[0]
             if report_filename is None:
                 report_filename = f"server_hb_report_{client_ip}.txt"
+                # Clear the file at the start of the program
+                with open(report_filename, "w") as report_file:
+                    report_file.write("")     # Clear the file contents
                 print(f"Writing report to {report_filename}")
 
             # Decode the received message
