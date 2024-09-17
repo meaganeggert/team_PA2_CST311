@@ -2,18 +2,14 @@
 # We will need the following module to generate
 # randomized lost packets
 import random
-import time
 from socket import socket, AF_INET, SOCK_DGRAM
 
 
 
-# 1. Create a UDP socket. Be sure to use SOCK_DGRAM since we are working with UDP packets
-# 2. Assign IP address and port number to socket
-# 3. Initialze a variable to count the number of pings
 s = socket(AF_INET, SOCK_DGRAM)
 HOST = "10.0.0.1"
 PORT = 2500
-MAX_PACKET_COUNT = 10
+EXPECTED_PACKET_COUNT = 10
 # ***Initialized ping count within main***
 
 
@@ -22,14 +18,14 @@ MAX_PACKET_COUNT = 10
 def packet_drop_order():
    tmpArray = []
 
-   # For 40 percent of expected packets to be recieved, determine which packets will be dropped.
-   for x in range(int(.4 * MAX_PACKET_COUNT)):
+   # For 40 percent of expected packets to be received, determine which packets will be dropped.
+   for x in range(int(.4 * EXPECTED_PACKET_COUNT)):
       # Range starts at two because we don't want the first packet to be dropped.
-      rndNum = random.randint(2,MAX_PACKET_COUNT)
+      rndNum = random.randint(2,EXPECTED_PACKET_COUNT)
 
       # Make sure there are no repeats in selected packets
       while rndNum in tmpArray:
-         rndNum = random.randint(2,MAX_PACKET_COUNT)
+         rndNum = random.randint(2,EXPECTED_PACKET_COUNT)
        
       tmpArray.insert(x, rndNum)
    print("Packets to be dropped: {}".format(tmpArray))
@@ -74,7 +70,7 @@ def main():
        if not data or packet_drop_valid(ping_count, packet_drops):
           print("Packet dropped")
        else:
-          print("Packet recieved")
+          print("Packet received")
           s.sendto(data, addr)
 
 
