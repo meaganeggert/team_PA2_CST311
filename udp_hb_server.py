@@ -1,6 +1,7 @@
 import random
 import socket
 
+
 HOST = "10.0.0.1"
 PORT = 3737
 
@@ -25,7 +26,12 @@ def main():
 
             # Decode the received message
             message = data.decode('utf-8')
-            
+
+            # MEAGAN DEBUGGING
+            message = message.upper()
+            data = message.encode('utf-8')
+            s.sendto(data, addr)
+
             try:
                 # Parse the sequence number and timestamp from the message
                 parts = message.split()
@@ -36,6 +42,7 @@ def main():
                 print(f"Received unexpected message format: {message}")
                 continue
             
+
             # Open report file in append mode
             with open(report_filename, "a") as report_file:
                 # Handle missing heartbeats

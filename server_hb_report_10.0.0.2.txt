@@ -1,0 +1,16 @@
+HB 1: Missing UDP heartbeat
+HB 2: Messages received: sequence 2, time 09:06:20
+HB 1: Messages received: sequence 1, time 09:07:27
+HB 1: Messages received: sequence 1, time 09:12:02
+HB 1: Messages received: sequence 1, time 09:18:20
+HB 1: Messages received: sequence 1, time 09:20:19
+HB 1: Messages received: sequence 1, time 09:24:01
+HB 2: Messages received: sequence 2, time 09:24:04
+HB 3: Missing UDP heartbeat
+HB 4: Messages received: sequence 4, time 09:24:10
+HB 5: Missing UDP heartbeat
+HB 6: Missing UDP heartbeat
+HB 7: Missing UDP heartbeat
+HB 8: Messages received: sequence 8, time 09:24:22
+HB 9: Messages received: sequence 9, time 09:24:25
+HB 10: Messages received: sequence 10, time 09:24:28

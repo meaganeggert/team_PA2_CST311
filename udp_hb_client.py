@@ -10,7 +10,7 @@ HB_num = 1;
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     s.connect((HOST, PORT))
-    while True:
+    for i in range(10):
         now = datetime.now() # current date/time
         cur_time = now.strftime("%H:%M:%S")
 #        cur_time = now.strftime("%H:%M:%S:%f") # This format includes microseconds
