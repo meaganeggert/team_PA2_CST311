@@ -2,6 +2,7 @@
 # We will need the following module to generate
 # randomized lost packets
 import random
+import time
 from socket import socket, AF_INET, SOCK_DGRAM
 
 
@@ -49,30 +50,25 @@ def packet_drop_valid(ping_count, packet_drops):
 
 
 def main():
-    # 1. Start an infinite loop
-    # 2. Count the pings received using the previously initialized variable
-    # 3. Generate a random number between 1 and 10 (inclusive)
-    # 4. Receive the client packet along with the address it is coming from
-    # 5. IF conditions for packet loss simulation are met, THEN consider the packet lost and do not respond
-    # 6. Otherwise, the server responds
-    
     # Set up socket and initialize ping count and packets to be dropped
     print("Initializing")
     s.bind((HOST, PORT))
     ping_count = 0
-    packet_drops = packet_drop_order()
-    print("Ready")
+    print("Server listening on {HOST}:{Port}")
 
     while True:
-       # After reaching expected packet count, reset the ping count and packet drop order
-       if ping_count == MAX_PACKET_COUNT:
-          print("Resetting ping count and packet drop order")
+       # Retrieve data from client, must be re-encoded later
+       data, addr = s.recvfrom(1024)
+       message = data.decode()
+       
+       # If client reset ping count, server should reset ping count and order of packet drops
+       if message == "Ping1":
           ping_count = 0
           packet_drops = packet_drop_order()
 
-       # Otherwise, keep incrementing the ping counter and recieving data from socket
+       # Otherwise, keep incrementing the ping counter and re-encoding the data
        ping_count += 1
-       data, addr = s.recvfrom(1024)
+       data = message.encode('utf-8')
        
        # Determine if the server should respond to the client
        if not data or packet_drop_valid(ping_count, packet_drops):
